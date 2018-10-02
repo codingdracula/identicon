@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Identicon
 
 **TODO: Add description**
@@ -20,6 +19,3 @@ Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_do
 and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
 be found at [https://hexdocs.pm/identicon](https://hexdocs.pm/identicon).
 
-=======
-# README
->>>>>>> 7f14c567cda039bca4639effff883c21fa843580
