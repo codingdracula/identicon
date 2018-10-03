@@ -19,12 +19,22 @@ defmodule Identicon do
     %Identicon.Image{list: list}
   end
 
-  def colors(hash) do
-     [r, g, b | _tail] =
-    hash
-    |> String.codepoints
-    |> Enum.chunk_every(2)
-    |> Enum.map(&Enum.join/1)
-    [r, g, b]
+  @doc """
+  Takes a struct and pattern matches the whole
+  list to the list value of the struct (head).
+  Then it pattern matches color (tail) to the
+  r,g,b values (first 3 numbers in the list)
+
+  ## Example
+
+        iex> Identicon.transformation("foobar")
+        %Identicon.Image{
+          color: {56, 88, 246},
+          list: [56, 88, 246, 34, 48, 172, 60, 145, 95, 48, 12, 102, 67, 18, 198, 63]
+        }
+
+  """
+  def colors( %Identicon.Image{list: [r, g, b | _tail]} = image) do
+    %Identicon.Image{image | color: {r, g, b}}
   end
 end
