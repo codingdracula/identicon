@@ -2,9 +2,9 @@ defmodule IdenticonTest do
   use ExUnit.Case
   doctest Identicon
 
-  test "expect hash to match name" do
-    foo = Identicon.convert_to_hash("foobar")
-    bar = Identicon.convert_to_hash("foobar")
+  test "expect a list to always be the same" do
+    foo = Identicon.convert_to_list("foobar")
+    bar = Identicon.convert_to_list("foobar")
     assert foo == bar
   end
 
@@ -12,8 +12,8 @@ defmodule IdenticonTest do
     name = "foobar"
     foobar =
     name
-    |> Identicon.convert_to_hash
+    |> Identicon.convert_to_list
     |> Identicon.colors
-    assert foobar == ["38", "58", "F6"]
+    assert foobar.color == {56, 88, 246}
   end
 end
