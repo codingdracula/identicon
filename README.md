@@ -30,7 +30,7 @@ iex -S mix
 Identicon.transformation("name")
 ```
 
-> Images by default are saved to the images folder.
+> New images by default are saved to the `images` folder.
 
 ## Examples
 ---
