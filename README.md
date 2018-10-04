@@ -1,21 +1,39 @@
 # Identicon
 
-**TODO: Add description**
+## Version Information
+```
+app: :identicon,
+version: "0.1.0",
+elixir: "~> 1.7",
+```
+## Install elixir
+> https://elixir-lang.org/install.html
 
-## Installation
-
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed
-by adding `identicon` to your list of dependencies in `mix.exs`:
-
-```elixir
-def deps do
-  [
-    {:identicon, "~> 0.1.0"}
-  ]
-end
+## How to test
+```
+mix test
 ```
 
-Documentation can be generated with [ExDoc](https://github.com/elixir-lang/ex_doc)
-and published on [HexDocs](https://hexdocs.pm). Once published, the docs can
-be found at [https://hexdocs.pm/identicon](https://hexdocs.pm/identicon).
+## How to run
 
+```
+iex -S mix
+Identicon.transformation("name")
+```
+
+> Images by default are saved to the images folder.
+
+## Examples
+---
+<div align=center>
+
+### **codingdracula** <br> <br>
+![codingdracula](images/codingdracula.png)
+<br> <br>
+### **foobar** <br> <br>
+![foobar](images/foobar.png)
+<br><br>
+### **identicon**
+![identicon](images/identicon.png)
+
+</div>
