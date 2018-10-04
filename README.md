@@ -15,8 +15,8 @@ mix test
 ```
 
 ## How to run
-
 ```
+mix deps.get
 iex -S mix
 Identicon.transformation("name")
 ```
