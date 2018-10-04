@@ -11,7 +11,7 @@ elixir: "~> 1.7",
 ## Install elixir
 > https://elixir-lang.org/install.html
 
-## How to test
+## How to run tests
 ```
 mix test
 ```
