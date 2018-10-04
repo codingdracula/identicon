@@ -11,6 +11,10 @@ defmodule Identicon do
     |> convert_to_list
     |> define_colors
     |> build_grid
+    |> filter
+    |> build_pixel_map
+    |> draw_image
+    |> save_image(name)
   end
 
   @doc """
@@ -34,7 +38,7 @@ defmodule Identicon do
   end
 
   @doc """
-  creates a grid with mirrored rows. flattern
+  Creates a grid with mirrored rows. Flattern
   converts a list of lists to a list. Then an
   index is added to the flattened list. This
   creates a list with 2 element tuples. We
@@ -59,5 +63,54 @@ defmodule Identicon do
     [first, second | _tail] = row
     # appends second, first elements to row
     row  ++ [second, first]
+  end
+
+  @doc """
+  Filter out values, so that the image can be colored.
+  This updates the grid with even values.
+  """
+  def filter(%Identicon.Image{grid: grid} = image) do
+    grid =  Enum.filter grid, fn({code, _index}) ->
+      rem(code, 2) == 0
+    end
+    %Identicon.Image{image | grid: grid}
+  end
+
+  @doc """
+  Creates a pixel map of squares and updates the struct
+  pixel map field. This is the basic layout before we can
+  render the image.
+  """
+  def build_pixel_map(%Identicon.Image{grid: grid} = image) do
+    pixel_map = Enum.map grid, fn({_code, index}) ->
+      horizontal = rem(index, 5) * 50
+      vertical = div(index, 5) * 50
+
+      top_left = {horizontal, vertical}
+      bottom_right = {horizontal + 50, vertical+50}
+
+      {top_left, bottom_right}
+    end
+    %Identicon.Image{image | pixel_map: pixel_map}
+  end
+
+  @doc """
+  This draws the actual identicon using the egd erlang library.
+  """
+  def draw_image(%Identicon.Image{color: color, pixel_map: pixel_map}) do
+    image = :egd.create(250, 250)
+    fill = :egd.color(color)
+
+    Enum.each pixel_map, fn({top_left, bottom_right}) ->
+      :egd.filledRectangle(image, top_left, bottom_right, fill)
+    end
+    :egd.render(image)
+  end
+
+  @doc """
+  Save the file to the hard-disk.
+  """
+  def save_image(image, name) do
+    File.write("images/#{name}.png", image)
   end
 end
